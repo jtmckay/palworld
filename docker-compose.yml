@@ -10,7 +10,6 @@ services:
     environment:
       - GAME_PATH=${GAME_PATH}
       - PUBLIC_IP=${PUBLIC_IP}
-      - PUBLIC_PORT=${PUBLIC_PORT}
       - MAX_PLAYERS=${MAX_PLAYERS}
       - COMMUNITY_SERVER=${COMMUNITY_SERVER}
       - SERVER_NAME=${SERVER_NAME}
@@ -18,6 +17,6 @@ services:
       - SERVER_PASSWORD=${SERVER_PASSWORD}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     ports:
-      - ${PUBLIC_PORT}:${PUBLIC_PORT}
+      - 15637:15637
     volumes:
       - ./game:/palworld

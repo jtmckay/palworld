@@ -12,7 +12,7 @@ ENV TIMEZONE=Europe/Berlin \
 
 VOLUME [ "/palworld" ]
 
-EXPOSE $PUBLIC_PORT/udp
+EXPOSE 15637/udp
 
 # Credit: https://github.com/jammsen/docker-palworld-dedicated-server/blob/master/servermanager.sh
 RUN echo ">>> Installing/updating the gameserver" \
@@ -25,7 +25,7 @@ mkdir -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer \
 echo "Copying config" \
 cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 sed -i "s/PublicIP=\"[^\"]*\"/PublicIP=\"$PUBLIC_IP\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
-sed -i "s/PublicPort=[0-9]*/PublicPort=$PUBLIC_PORT/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
+sed -i "s/PublicPort=[0-9]*/PublicPort=15637/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 echo "Setting server name to $SERVER_NAME" \
 sed -i "s/ServerName=\"[^\"]*\"/ServerName=\"$SERVER_NAME\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 sed -i "s/ServerDescription=\"[^\"]*\"/ServerDescription=\"$SERVER_DESCRIPTION\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \

@@ -8,7 +8,6 @@ services:
       dockerfile: ./Dockerfile
       context: ./
     environment:
-      - GAME_PATH=${GAME_PATH}
       - PUBLIC_IP=${PUBLIC_IP}
       - MAX_PLAYERS=${MAX_PLAYERS}
       - COMMUNITY_SERVER=${COMMUNITY_SERVER}

@@ -9,6 +9,7 @@ ENV TIMEZONE=Europe/Berlin \
     MULTITHREAD_ENABLED=true
 
 # Palworld
+ENV GAME_PATH="/palworld"
 
 VOLUME [ "/palworld" ]
 
@@ -21,17 +22,22 @@ RUN echo ">>> Installing/updating the gameserver" \
 RUN echo ">>> Configuring the gameserver"
 RUN cd $GAME_PATH
 RUN echo "Making config dir"
-RUN mkdir -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer
+
+USER root
+RUN mkdir -m 777 -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer
+USER steam
+
 RUN echo "Copying config"
-RUN cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/PublicIP=\"[^\"]*\"/PublicIP=\"$PUBLIC_IP\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/PublicPort=[0-9]*/PublicPort=15637/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+RUN cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/PublicIP=\"[^\"]*\"/PublicIP=\"$PUBLIC_IP\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/PublicPort=[0-9]*/PublicPort=15637/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
 RUN echo "Setting server name to $SERVER_NAME"
-RUN sed -i "s/ServerName=\"[^\"]*\"/ServerName=\"$SERVER_NAME\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/ServerDescription=\"[^\"]*\"/ServerDescription=\"$SERVER_DESCRIPTION\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/ServerPassword=\"[^\"]*\"/ServerPassword=\"$SERVER_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/AdminPassword=\"[^\"]*\"/AdminPassword=\"$ADMIN_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-RUN sed -i "s/ServerPlayerMaxNum=[0-9]*/ServerPlayerMaxNum=$MAX_PLAYERS/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+RUN sed -i "s/ServerName=\"[^\"]*\"/ServerName=\"$SERVER_NAME\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/ServerDescription=\"[^\"]*\"/ServerDescription=\"$SERVER_DESCRIPTION\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/ServerPassword=\"[^\"]*\"/ServerPassword=\"$SERVER_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/AdminPassword=\"[^\"]*\"/AdminPassword=\"$ADMIN_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
+RUN sed -i "s/ServerPlayerMaxNum=[0-9]*/ServerPlayerMaxNum=$MAX_PLAYERS/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini || true
 
 CMD echo ">>> Starting the gameserver" && \
+sleep 99999 && \
 ./PalServer.sh "EpicApp=PalServer -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS"

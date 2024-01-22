@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  palworld:
+    # restart: unless-stopped
+    network_mode: bridge
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+      args:
+        - GAME_PATH=${GAME_PATH}
+        - PUBLIC_IP=${PUBLIC_IP}
+        - PUBLIC_PORT=${PUBLIC_PORT}
+        - MAX_PLAYERS=${MAX_PLAYERS}
+        - COMMUNITY_SERVER=${COMMUNITY_SERVER}
+        - SERVER_NAME=${SERVER_NAME}
+        - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
+        - SERVER_PASSWORD=${SERVER_PASSWORD}
+        - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    ports:
+      - 15637:15637
+    volumes:
+      - ./game:/palworld

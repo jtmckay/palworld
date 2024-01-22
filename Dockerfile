@@ -44,8 +44,6 @@ VOLUME [ "/palworld" ]
 
 EXPOSE $PUBLIC_PORT/udp
 
-ADD --chmod=777 servermanager.sh /servermanager.sh
-
 # Credit: https://github.com/jammsen/docker-palworld-dedicated-server/blob/master/servermanager.sh
 RUN \
 function installServer() { \

@@ -7,16 +7,16 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ./
-      environment:
-        - GAME_PATH=${GAME_PATH}
-        - PUBLIC_IP=${PUBLIC_IP}
-        - PUBLIC_PORT=${PUBLIC_PORT}
-        - MAX_PLAYERS=${MAX_PLAYERS}
-        - COMMUNITY_SERVER=${COMMUNITY_SERVER}
-        - SERVER_NAME=${SERVER_NAME}
-        - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
-        - SERVER_PASSWORD=${SERVER_PASSWORD}
-        - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    environment:
+      - GAME_PATH=${GAME_PATH}
+      - PUBLIC_IP=${PUBLIC_IP}
+      - PUBLIC_PORT=${PUBLIC_PORT}
+      - MAX_PLAYERS=${MAX_PLAYERS}
+      - COMMUNITY_SERVER=${COMMUNITY_SERVER}
+      - SERVER_NAME=${SERVER_NAME}
+      - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
+      - SERVER_PASSWORD=${SERVER_PASSWORD}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     ports:
       - ${PUBLIC_PORT}:${PUBLIC_PORT}
     volumes:

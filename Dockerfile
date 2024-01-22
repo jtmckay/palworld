@@ -15,9 +15,6 @@ VOLUME [ "/palworld" ]
 
 EXPOSE 15637/udp
 
-RUN echo ">>> Installing/updating the gameserver"
-RUN /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit
-
 RUN echo ">>> Copying servermanager.sh over"
 ADD --chmod=777 servermanager.sh /servermanager.sh
 

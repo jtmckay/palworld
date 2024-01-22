@@ -4,9 +4,7 @@ services:
   palworld:
     # restart: unless-stopped
     network_mode: bridge
-    build:
-      dockerfile: ./Dockerfile
-      context: ./
+    image: jtmckay/palworld:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}
       - MAX_PLAYERS=${MAX_PLAYERS}

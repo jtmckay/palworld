@@ -1,4 +1,4 @@
-FROM cm2network/steamcmd
+FROM steamcmd/steamcmd:ubuntu-22
 
 # Set environment variables
 ENV TIMEZONE=Europe/Berlin \
@@ -15,7 +15,7 @@ VOLUME [ "/palworld" ]
 
 EXPOSE 15637/udp
 
-RUN echo ">>> Copying servermanager.sh over"
+RUN echo ">>> Copying servermanager.sh"
 ADD --chmod=777 servermanager.sh /servermanager.sh
 
 CMD ["/servermanager.sh"]

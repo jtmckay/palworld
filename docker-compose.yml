@@ -2,11 +2,9 @@ version: "3.8"
 
 services:
   palworld:
-    # restart: unless-stopped
+    restart: unless-stopped
     network_mode: bridge
-    build:
-      dockerfile: ./Dockerfile
-      context: ./
+    iamge: jammsen/palworld-dedicated-server:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}
       - MAX_PLAYERS=${MAX_PLAYERS}

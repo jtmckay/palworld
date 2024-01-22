@@ -61,8 +61,5 @@ sed -i "s/ServerPassword=\"[^\"]*\"/ServerPassword=\"$SERVER_PASSWORD\"/" ${GAME
 sed -i "s/AdminPassword=\"[^\"]*\"/AdminPassword=\"$ADMIN_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 sed -i "s/ServerPlayerMaxNum=[0-9]*/ServerPlayerMaxNum=$MAX_PLAYERS/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
-RUN echo ">>> Starting the gameserver" \
+CMD echo ">>> Starting the gameserver" \
 ./PalServer.sh "EpicApp=PalServer -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS"
-
-RUN echo "Going to sleep"
-RUN sleep 99999

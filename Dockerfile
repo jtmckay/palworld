@@ -44,6 +44,6 @@ VOLUME [ "/palworld" ]
 
 EXPOSE $PUBLIC_PORT/udp
 
-ADD --chmod=777 servermanager.sh /servermanager.sh
+ADD servermanager.sh /servermanager.sh
 
 CMD ["/servermanager.sh"]

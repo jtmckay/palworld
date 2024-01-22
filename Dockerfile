@@ -1,4 +1,4 @@
-FROM cm2network/steamcmd
+FROM steamcmd/steamcmd:ubuntu-22
 
 # Incoming arguments as environment variables
 ARG GAME_PATH

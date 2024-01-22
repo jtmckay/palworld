@@ -51,13 +51,7 @@ echo ">>> Doing an update of the gameserver" \
 echo ">>> Starting the gameserver" \
 cd $GAME_PATH \
 echo "Checking if config exists" \
-if [ ! -f ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini ]; \
-  then echo "No config found, generating one" \
-  if [ ! -d ${GAME_PATH}/Pal/Saved/Config/LinuxServer ]; \
-    then mkdir -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer \
-  fi \
-  cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
-fi \
+if [ ! -f ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini ]; then echo "No config found, generating one" if [ ! -d ${GAME_PATH}/Pal/Saved/Config/LinuxServer ]; then mkdir -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer fi cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini fi \
 sed -i "s/PublicIP=\"[^\"]*\"/PublicIP=\"$PUBLIC_IP\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 sed -i "s/PublicPort=[0-9]*/PublicPort=$PUBLIC_PORT/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
 echo "Setting server name to $SERVER_NAME" \

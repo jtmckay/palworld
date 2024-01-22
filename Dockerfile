@@ -45,18 +45,16 @@ VOLUME [ "/palworld" ]
 EXPOSE $PUBLIC_PORT/udp
 
 # Credit: https://github.com/jammsen/docker-palworld-dedicated-server/blob/master/servermanager.sh
-RUN \
-function installServer() { \
-    # force a fresh install of all \
-    echo ">>> Doing a fresh install of the gameserver" \
-    /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit \
-} \
-function updateServer() { \
-    # force an update and validation \
-    echo ">>> Doing an update of the gameserver" \
-    /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit \
-} \
-function startServer() { \
+RUN if [ ! -f "/palworld/PalServer.sh" ]; then \
+      # force a fresh install of all \
+      echo ">>> Doing a fresh install of the gameserver" \
+      /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit \
+    fi \
+    if [ $ALWAYS_UPDATE_ON_START == "true" ]; then \
+      # force an update and validation \
+      echo ">>> Doing an update of the gameserver" \
+      /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit \
+    fi \
     echo ">>> Starting the gameserver" \
     cd $GAME_PATH \
     echo "Checking if config exists" \
@@ -102,7 +100,6 @@ function startServer() { \
         echo "Setting max-players to $MAX_PLAYERS" \
         sed -i "s/ServerPlayerMaxNum=[0-9]*/ServerPlayerMaxNum=$MAX_PLAYERS/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini \
     fi \
- \
     START_OPTIONS="" \
     if [[ -n $COMMUNITY_SERVER ]] && [[ $COMMUNITY_SERVER == "true" ]]; then \
         START_OPTIONS="$START_OPTIONS EpicApp=PalServer" \
@@ -110,16 +107,4 @@ function startServer() { \
     if [[ -n $MULTITHREAD_ENABLED ]] && [[ $MULTITHREAD_ENABLED == "true" ]]; then \
         START_OPTIONS="$START_OPTIONS -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS" \
     fi \
-    ./PalServer.sh "$START_OPTIONS" \
-} \
-function startMain() { \
-    # Check if server is installed, if not try again \
-    if [ ! -f "/palworld/PalServer.sh" ]; then \
-        installServer \
-    fi \
-    if [ $ALWAYS_UPDATE_ON_START == "true" ]; then \
-        updateServer \
-    fi \
-    startServer \
-} \
-startMain
+    ./PalServer.sh "$START_OPTIONS"

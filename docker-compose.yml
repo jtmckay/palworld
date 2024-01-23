@@ -3,9 +3,7 @@ version: "3.8"
 services:
   palworld:
     # restart: unless-stopped
-    build:
-      image: jtmckay/palworld:latest
-      context: ./
+    image: jtmckay/palworld:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}
       - MAX_PLAYERS=${MAX_PLAYERS}

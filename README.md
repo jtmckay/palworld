@@ -26,4 +26,11 @@ docker push jtmckay/palworld:latest
 ```
 
 ### Make a backup of game files
+Copy to target from source
 `tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`
+
+### Reboot server automatically
+Edit cron
+`sudo crontab -e`
+Everyday at noon UTC
+`0 12 * * * /sbin/shutdown -r +5`

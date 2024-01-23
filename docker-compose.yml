@@ -11,6 +11,7 @@ services:
       - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
       - SERVER_PASSWORD=${SERVER_PASSWORD}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - WORLD_OPTION_SETTINGS=${WORLD_OPTION_SETTINGS}
     volumes:
       - ./game:/palworld
     restart: always
@@ -20,6 +21,9 @@ services:
       - target: 8211 # gamerserver port inside of the container
         published: 8211 # gamerserver port on your host
         protocol: udp
+        mode: host
+      - target: 27015 # gamerserver port inside of the container
+        published: 27015 # gamerserver port on your host
         mode: host
       - target: 25575 # rcon port inside of the container
         published: 25575 # rcon port on your host

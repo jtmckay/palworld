@@ -6,7 +6,12 @@ ENV TIMEZONE=Europe/Berlin \
     PUID=0 \
     PGID=0 \
     ALWAYS_UPDATE_ON_START=true \
-    MULTITHREAD_ENABLED=true
+    MAX_PLAYERS=32 \
+    MULTITHREAD_ENABLED=true \
+    COMMUNITY_SERVER=true \
+    RCON_ENABLED=true \
+    RCON_PORT=25575 \
+    PUBLIC_PORT=8211
 
 # Palworld
 ENV GAME_PATH="/palworld"
@@ -15,10 +20,7 @@ VOLUME [ "/palworld" ]
 
 EXPOSE 15637/udp
 
-RUN echo ">>> Installing/updating the gameserver"
-RUN /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit
-
-RUN echo ">>> Copying servermanager.sh over"
+RUN echo ">>> Copying servermanager.sh"
 ADD --chmod=777 servermanager.sh /servermanager.sh
 
 CMD ["/servermanager.sh"]

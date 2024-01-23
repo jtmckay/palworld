@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   palworld:
-    # restart: unless-stopped
-    network_mode: bridge
+    restart: unless-stopped
     image: jtmckay/palworld:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}

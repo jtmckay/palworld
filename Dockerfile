@@ -1,4 +1,4 @@
-FROM steamcmd/steamcmd:ubuntu-22
+FROM cm2network/steamcmd
 
 # Set environment variables
 ENV TIMEZONE=Europe/Berlin \

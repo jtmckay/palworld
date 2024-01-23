@@ -24,3 +24,6 @@ docker build -t palworld .
 docker tag palworld jtmckay/palworld:latest
 docker push jtmckay/palworld:latest
 ```
+
+### Make a backup of game files
+`tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`

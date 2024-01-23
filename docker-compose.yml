@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   palworld:
-    # restart: unless-stopped
     image: jtmckay/palworld:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}
@@ -12,8 +11,16 @@ services:
       - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
       - SERVER_PASSWORD=${SERVER_PASSWORD}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-    ports:
-      - 15637:15637
     volumes:
       - ./game:/palworld
-    command: ["sleep", "infinity"]
+    restart: always
+    network_mode: bridge
+    ports:
+      - target: 8211 # gamerserver port inside of the container
+        published: 8211 # gamerserver port on your host
+        protocol: udp
+        mode: host
+      - target: 25575 # rcon port inside of the container
+        published: 25575 # rcon port on your host
+        protocol: tcp
+        mode: host

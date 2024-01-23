@@ -6,7 +6,12 @@ ENV TIMEZONE=Europe/Berlin \
     PUID=0 \
     PGID=0 \
     ALWAYS_UPDATE_ON_START=true \
-    MULTITHREAD_ENABLED=true
+    MAX_PLAYERS=32 \
+    MULTITHREAD_ENABLED=true \
+    COMMUNITY_SERVER=true \
+    RCON_ENABLED=true \
+    RCON_PORT=25575 \
+    PUBLIC_PORT=8211
 
 # Palworld
 ENV GAME_PATH="/palworld"

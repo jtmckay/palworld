@@ -8,6 +8,8 @@ Change permissions to allow everything.
 
 
 ## Push new build
-`docker build -t palworld .`
-`docker tag palworld jtmckay/palworld:latest`
-`docker push jtmckay/palworld:latest`
+```
+docker build -t palworld .
+docker tag palworld jtmckay/palworld:latest
+docker push jtmckay/palworld:latest
+```

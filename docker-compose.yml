@@ -4,7 +4,7 @@ services:
   palworld:
     # restart: unless-stopped
     build:
-      dockerfile: ./Dockerfile
+      image: jtmckay/palworld:latest
       context: ./
     environment:
       - PUBLIC_IP=${PUBLIC_IP}

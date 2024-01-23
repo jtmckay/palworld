@@ -8,7 +8,7 @@ function installServer() {
     # force a fresh install of all
     echo ">>> Doing a fresh install of the gameserver"
     /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit
-    mkdir -p ~/.steam/sdk64/
+    mkdir -p ~/.steam/sdk614/
     /home/steam/steamcmd/steamcmd.sh +login anonymous +app_update 1007 +quit
     cp ~/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so ~/.steam/sdk64/
 }
@@ -28,14 +28,8 @@ function startServer() {
     cd $GAME_PATH
 
     echo "Checking if config exists"
-    if [ ! -f ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini ]; then
-        echo "No config found, generating one"
-        if [ ! -d ${GAME_PATH}/Pal/Saved/Config/LinuxServer ]; then
-            mkdir -p ${GAME_PATH}/Pal/Saved/Config/LinuxServer
-        fi
-        # Copy default-config, which comes with the server to gameserver-save location
-        cp ${GAME_PATH}/DefaultPalWorldSettings.ini ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-    fi
+    echo "[/Script/Pal.PalGameWorldSettings]" > ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+    echo OptionSettings=(${WORLD_OPTION_SETTINGS//$'\n'/,}) >> ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
     if [[ ! -z ${RCON_ENABLED+x} ]]; then
         echo "Setting rcon-enabled to $RCON_ENABLED"

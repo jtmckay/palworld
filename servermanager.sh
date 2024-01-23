@@ -29,7 +29,7 @@ function startServer() {
 
     echo "Checking if config exists"
     echo "[/Script/Pal.PalGameWorldSettings]" > ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-    echo "OptionSettings=(${WORLD_OPTION_SETTINGS//$'\n'/,})" >> ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+    echo "OptionSettings=(${WORLD_OPTION_SETTINGS})" >> ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
     if [[ ! -z ${PUBLIC_IP+x} ]]; then
         echo "Setting public ip to $PUBLIC_IP"

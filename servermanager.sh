@@ -8,6 +8,9 @@ function installServer() {
     # force a fresh install of all
     echo ">>> Doing a fresh install of the gameserver"
     /home/steam/steamcmd/steamcmd.sh +force_install_dir "/palworld" +login anonymous +app_update 2394010 validate +quit
+    mkdir -p ~/.steam/sdk64/
+    /home/steam/steamcmd/steamcmd.sh +login anonymous +app_update 1007 +quit
+    cp ~/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so ~/.steam/sdk64/
 }
 
 function updateServer() {

@@ -15,6 +15,7 @@ services:
       - ./game:/palworld
     restart: always
     network_mode: bridge
+    # command: ["sleep", "infinity"]
     ports:
       - target: 8211 # gamerserver port inside of the container
         published: 8211 # gamerserver port on your host

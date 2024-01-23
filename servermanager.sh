@@ -31,14 +31,6 @@ function startServer() {
     echo "[/Script/Pal.PalGameWorldSettings]" > ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
     echo OptionSettings=(${WORLD_OPTION_SETTINGS//$'\n'/,}) >> ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
-    if [[ ! -z ${RCON_ENABLED+x} ]]; then
-        echo "Setting rcon-enabled to $RCON_ENABLED"
-        sed -i "s/RCONEnabled=[a-zA-Z]*/RCONEnabled=$RCON_ENABLED/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-    fi
-    if [[ ! -z ${RCON_PORT+x} ]]; then
-        echo "Setting rcon-port to $RCON_PORT"
-        sed -i "s/RCONPort=[0-9]*/RCONPort=$RCON_PORT/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-    fi
     if [[ ! -z ${PUBLIC_IP+x} ]]; then
         echo "Setting public ip to $PUBLIC_IP"
         sed -i "s/PublicIP=\"[^\"]*\"/PublicIP=\"$PUBLIC_IP\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
@@ -68,10 +60,6 @@ function startServer() {
     if [[ ! -z ${ADMIN_PASSWORD+x} ]]; then
         echo "Setting server admin password to $ADMIN_PASSWORD"
         sed -i "s/AdminPassword=\"[^\"]*\"/AdminPassword=\"$ADMIN_PASSWORD\"/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-    fi
-    if [[ ! -z ${MAX_PLAYERS+x} ]]; then
-        echo "Setting max-players to $MAX_PLAYERS"
-        sed -i "s/ServerPlayerMaxNum=[0-9]*/ServerPlayerMaxNum=$MAX_PLAYERS/" ${GAME_PATH}/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
     fi
 
     START_OPTIONS=""

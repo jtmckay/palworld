@@ -5,7 +5,6 @@ services:
     image: jtmckay/palworld:latest
     environment:
       - PUBLIC_IP=${PUBLIC_IP}
-      - MAX_PLAYERS=${MAX_PLAYERS}
       - COMMUNITY_SERVER=${COMMUNITY_SERVER}
       - SERVER_NAME=${SERVER_NAME}
       - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}

@@ -25,12 +25,17 @@ docker tag palworld jtmckay/palworld:latest
 docker push jtmckay/palworld:latest
 ```
 
+### Automagically run commands
+Edit cron
+`sudo crontab -e`
+
 ### Make a backup of game files
 Copy to target from source
 `tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`
+Everyday at noon UTC (5am MST)
+`0 12 * * * tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`
 
-### Reboot server automatically
-Edit cron
-`sudo crontab -e`
-Everyday at noon UTC
+### Reboot server
+`/sbin/shutdown -r`
+Everyday at noon UTC +5 minutes
 `0 12 * * * /sbin/shutdown -r +5`

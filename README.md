@@ -39,3 +39,12 @@ Everyday at noon UTC (5am MST)
 `/sbin/shutdown -r`
 Everyday at noon UTC +5 minutes
 `0 12 * * * /sbin/shutdown -r +5`
+
+### Update .env
+All variables must be single lines going into docker
+#### Update .env.example
+#### Load variables
+`source .env.example`
+#### Update .env
+`echo "WORLD_OPTION_SETTINGS='$WORLD_OPTION_SETTINGS'" >> .env`
+#### Delete old line

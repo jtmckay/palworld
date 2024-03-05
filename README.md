@@ -31,9 +31,9 @@ Edit cron
 
 ### Make a backup of game files
 Copy to target from source
-`tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`
+`tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/game/Pal/Saved/`
 Everyday at noon UTC (5am MST)
-`0 12 * * * tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/games/Pal/Saved/`
+`0 12 * * * tar cfz ~/backups/saved-$(date +%Y%m%d_%H%M%S).tar.gz ~/palworld/game/Pal/Saved/`
 
 ### Reboot server
 `/sbin/shutdown -r`
